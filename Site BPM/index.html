@@ -104,34 +104,33 @@
       transform: scale(0.98);
     }
 
-    /* Carrossel */
     .carrossel {
       position: relative;
       overflow: hidden;
       margin-top: 10px;
     }
 
-    /* Torna faixa de slides scrollável horizontalmente com snap para mobile */
     .faixa-slides {
       display: flex;
       gap: 20px;
       touch-action: pan-y;
-      overflow-x: auto;             /* permite scroll horizontal */
-      scroll-snap-type: x mandatory; /* snap */
-      -webkit-overflow-scrolling: touch; /* melhor scroll no iOS */
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
       scroll-behavior: smooth;
-      /* ESCONDER A BARRA DE ROLAGEM */
-      -ms-overflow-style: none;  /* IE e Edge */
-      scrollbar-width: none;     /* Firefox */
+      -ms-overflow-style: none;
+      scrollbar-width: none;
     }
+
     .faixa-slides::-webkit-scrollbar {
-      display: none;             /* Chrome, Safari e Opera */
+      display: none;
     }
+
     .slide {
       flex-shrink: 0;
       width: 100%;
       max-width: 320px;
-      scroll-snap-align: center;    /* snap das imagens */
+      scroll-snap-align: center;
       animation: fadeIn 0.6s ease-in-out;
     }
 
@@ -149,7 +148,6 @@
       transform: scale(1.05);
     }
 
-    /* Botões setas */
     .seta {
       position: absolute;
       top: 45%;
@@ -178,7 +176,6 @@
       right: 10px;
     }
 
-    /* Indicadores bolinhas */
     .indicadores {
       display: flex;
       justify-content: center;
@@ -241,7 +238,6 @@
       margin-bottom: 80px;
     }
 
-    /* ======= MEDIA QUERIES ======= */
     @media (max-width: 768px) {
       h2 {
         font-size: 1.8rem;
@@ -255,7 +251,7 @@
 
     @media (max-width: 480px) {
       body {
-        font-size: 1rem; /* diminui um pouco mais para ficar compacto */
+        font-size: 1rem;
       }
 
       h2 {
@@ -263,26 +259,22 @@
       }
 
       header img {
-        max-height: 60vh; /* header menor em celular para não ocupar tanto espaço */
+        max-height: 60vh;
       }
 
-      /* Ajuste para o carrossel: remover gap para evitar overflow desnecessário */
       .faixa-slides {
         gap: 12px;
       }
 
-      /* Botões menores para não atrapalhar imagens */
       .seta {
         font-size: 1rem;
         padding: 4px 8px;
       }
 
-      /* Reduz largura máxima do slide para garantir encaixe em telas bem pequenas */
       .slide {
         max-width: 280px;
       }
 
-      /* Ajuste nos espaços internos para um layout mais compacto */
       main {
         margin: 40px auto;
         padding: 0 3%;
@@ -301,7 +293,7 @@
 </head>
 <body>
   <header>
-    <img src="banner.png" alt="Banner da Comunidade Batalha pela Mente mostrando força e união" />
+    <img src="Site BPM/banner.png" alt="Banner da Comunidade Batalha pela Mente mostrando força e união" />
   </header>
 
   <main>
@@ -326,11 +318,11 @@
       <div class="carrossel" id="carrossel">
         <button class="seta esquerda" onclick="moverSlide(-1)">←</button>
         <div class="faixa-slides" id="faixa">
-          <div class="slide"><img src="relatos/resized_Captura de tela 2025-07-01 170206.png" alt="Depoimento sobre desempenho sexual e autoconhecimento" /></div>
-          <div class="slide"><img src="relatos/resized_IMG_7477.PNG" alt="Motivação e união dentro do grupo de apoio" /></div>
-          <div class="slide"><img src="relatos/resized_IMG_7478.PNG" alt="Sentimento de pertencimento e conexão emocional" /></div>
-          <div class="slide"><img src="relatos/resized_Captura de tela 2025-07-01 170023.png" alt="Reflexão profunda sobre vício e superação" /></div>
-          <div class="slide"><img src="relatos/resized_Captura de tela 2025-07-01 170150.png" alt="Melhoras na vida pessoal com prática do nofap" /></div>
+          <div class="slide"><img src="Site BPM/relatos/resized_Captura de tela 2025-07-01 170206.png" alt="Depoimento sobre desempenho sexual e autoconhecimento" /></div>
+          <div class="slide"><img src="Site BPM/relatos/resized_IMG_7477.PNG" alt="Motivação e união dentro do grupo de apoio" /></div>
+          <div class="slide"><img src="Site BPM/relatos/resized_IMG_7478.PNG" alt="Sentimento de pertencimento e conexão emocional" /></div>
+          <div class="slide"><img src="Site BPM/relatos/resized_Captura de tela 2025-07-01 170023.png" alt="Reflexão profunda sobre vício e superação" /></div>
+          <div class="slide"><img src="Site BPM/relatos/resized_Captura de tela 2025-07-01 170150.png" alt="Melhoras na vida pessoal com prática do nofap" /></div>
         </div>
         <button class="seta direita" onclick="moverSlide(1)">→</button>
         <div class="indicadores"></div>
@@ -343,7 +335,7 @@
       <div class="cta">
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSc8BESjmYUqHvPfJlYvXDGX8nIg1665grbD2l1Eg0xpL3dr4g/viewform?usp=sharing" target="_blank">🧠 Quero fazer parte da comunidade</a>
       </div>
-       <p><em>🔐 Seus dados são protegidos e usados apenas para seu ingresso na comunidade.</em></p>
+      <p><em>🔐 Seus dados são protegidos e usados apenas para seu ingresso na comunidade.</em></p>
     </section>
   </main>
 
@@ -351,7 +343,6 @@
     “⚡ Transformação, coragem e fortalecimento da mente. Você não está sozinho.”
   </footer>
 
-  <!-- ZOOM FULLSCREEN -->
   <div class="zoom-overlay" id="zoomOverlay" onclick="fecharZoom()">
     <img id="zoomImagem" src="" alt="Imagem ampliada" />
   </div>
@@ -362,7 +353,6 @@
     const slideItems = document.querySelectorAll('.faixa-slides .slide');
     const indicadoresContainer = document.querySelector('.indicadores');
 
-    // Criar indicadores
     slideItems.forEach((_, i) => {
       const btn = document.createElement("button");
       btn.addEventListener("click", () => {
@@ -373,8 +363,12 @@
     });
 
     function atualizarSlide() {
-      const larguraSlide = slideItems[0].clientWidth + 20;
-      slides.style.transform = `translateX(-${slideAtual * larguraSlide}px)`;
+      const slideWidth = slideItems[0].offsetWidth + parseInt(getComputedStyle(slides).gap || 20);
+      slides.scrollTo({
+        left: slideAtual * slideWidth,
+        behavior: 'smooth'
+      });
+
       document.querySelectorAll(".indicadores button").forEach((b, i) => {
         b.classList.toggle("ativo", i === slideAtual);
       });
@@ -390,7 +384,6 @@
     setInterval(() => moverSlide(1), 5000);
     atualizarSlide();
 
-    // ZOOM nas imagens
     document.querySelectorAll('.slide img').forEach(img => {
       img.addEventListener('click', () => {
         document.getElementById('zoomImagem').src = img.src;
@@ -402,7 +395,6 @@
       document.getElementById('zoomOverlay').style.display = 'none';
     }
 
-    // Swipe para celular
     let startX = 0;
     slides.addEventListener('touchstart', e => startX = e.touches[0].clientX);
     slides.addEventListener('touchend', e => {
