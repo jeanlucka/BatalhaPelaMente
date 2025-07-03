@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Comunidade Batalha pela Mente</title>
+  <title>Comunidade Batalha pela Mente | Transforme sua vida e supere vícios</title>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@600;700&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -113,6 +113,7 @@
     .faixa-slides {
       display: flex;
       gap: 20px;
+      touch-action: pan-y;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
@@ -130,6 +131,7 @@
       width: 100%;
       max-width: 320px;
       scroll-snap-align: center;
+      animation: fadeIn 0.6s ease-in-out;
     }
 
     .slide img {
@@ -158,6 +160,8 @@
       border-radius: 50%;
       cursor: pointer;
       z-index: 10;
+      transition: background 0.3s;
+      user-select: none;
     }
 
     .seta:hover {
@@ -191,6 +195,17 @@
 
     .indicadores button.ativo {
       background: var(--dourado);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .zoom-overlay {
@@ -278,13 +293,23 @@
 </head>
 <body>
   <header>
-    <img src="Site BPM/banner.png" alt="Banner da Comunidade" />
+    <img src="Site BPM/banner.png" alt="Banner da Comunidade Batalha pela Mente mostrando força e união" />
   </header>
 
   <main>
     <section>
       <h2>🧠 Quem somos</h2>
-      <p>Somos uma comunidade focada em reconstruir o poder da mente...</p>
+      <p>Somos uma comunidade focada em reconstruir o poder da mente. Reunimos pessoas que buscam superar vícios, fortalecer a disciplina e viver com mais clareza mental. São mais de 100 membros ativos criando uma rede de apoio real e transformadora.</p>
+    </section>
+
+    <section>
+      <h2>🧭 O que você vai encontrar</h2>
+      <ul>
+        <li>🗓️ Desafios semanais como “7 dias limpo” e “3 dias sem dopamina”</li>
+        <li>📚 Conteúdos sobre disciplina, vícios, clareza mental e autoestima</li>
+        <li>👥 Divisão por faixa etária para apoio mais direcionado</li>
+        <li>🎧 Áudios, reflexões e encontros ao vivo</li>
+      </ul>
     </section>
 
     <section>
@@ -293,15 +318,24 @@
       <div class="carrossel" id="carrossel">
         <button class="seta esquerda" onclick="moverSlide(-1)">←</button>
         <div class="faixa-slides" id="faixa">
-          <div class="slide"><img src="Site BPM/relatos/resized_Captura de tela 2025-07-01 170206.png" alt="Relato 1" /></div>
-          <div class="slide"><img src="Site BPM/relatos/resized_IMG_7477.PNG" alt="Relato 2" /></div>
-          <div class="slide"><img src="Site BPM/relatos/resized_IMG_7478.PNG" alt="Relato 3" /></div>
-          <div class="slide"><img src="Site BPM/relatos/resized_Captura de tela 2025-07-01 170023.png" alt="Relato 4" /></div>
-          <div class="slide"><img src="Site BPM/relatos/resized_Captura de tela 2025-07-01 170150.png" alt="Relato 5" /></div>
+          <div class="slide"><img src="Site BPM/relatos/resized_Captura de tela 2025-07-01 170206.png" alt="Depoimento sobre desempenho sexual e autoconhecimento" /></div>
+          <div class="slide"><img src="Site BPM/relatos/resized_IMG_7477.PNG" alt="Motivação e união dentro do grupo de apoio" /></div>
+          <div class="slide"><img src="Site BPM/relatos/resized_IMG_7478.PNG" alt="Sentimento de pertencimento e conexão emocional" /></div>
+          <div class="slide"><img src="Site BPM/relatos/resized_Captura de tela 2025-07-01 170023.png" alt="Reflexão profunda sobre vício e superação" /></div>
+          <div class="slide"><img src="Site BPM/relatos/resized_Captura de tela 2025-07-01 170150.png" alt="Melhoras na vida pessoal com prática do nofap" /></div>
         </div>
         <button class="seta direita" onclick="moverSlide(1)">→</button>
         <div class="indicadores"></div>
       </div>
+    </section>
+
+    <section>
+      <h2>🚀 Pronto para começar?</h2>
+      <p>Preencha o formulário com atenção para receber o link de entrada no WhatsApp ou por e-mail. Ao entrar, leia a mensagem fixada e se apresente com intenção.</p>
+      <div class="cta">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSc8BESjmYUqHvPfJlYvXDGX8nIg1665grbD2l1Eg0xpL3dr4g/viewform?usp=sharing" target="_blank">🧠 Quero fazer parte da comunidade</a>
+      </div>
+      <p><em>🔐 Seus dados são protegidos e usados apenas para seu ingresso na comunidade.</em></p>
     </section>
   </main>
 
@@ -310,14 +344,14 @@
   </footer>
 
   <div class="zoom-overlay" id="zoomOverlay" onclick="fecharZoom()">
-    <img id="zoomImagem" src="" alt="Zoom" />
+    <img id="zoomImagem" src="" alt="Imagem ampliada" />
   </div>
 
   <script>
     let slideAtual = 0;
-    const slidesContainer = document.querySelector('.faixa-slides');
-    const slideItems = document.querySelectorAll('.slide');
-    const indicadores = document.querySelector('.indicadores');
+    const slides = document.querySelector('.faixa-slides');
+    const slideItems = document.querySelectorAll('.faixa-slides .slide');
+    const indicadoresContainer = document.querySelector('.indicadores');
 
     slideItems.forEach((_, i) => {
       const btn = document.createElement("button");
@@ -325,15 +359,16 @@
         slideAtual = i;
         atualizarSlide();
       });
-      indicadores.appendChild(btn);
+      indicadoresContainer.appendChild(btn);
     });
 
     function atualizarSlide() {
-      const larguraSlide = slideItems[0].offsetWidth + 20;
-      slidesContainer.scrollTo({
-        left: slideAtual * larguraSlide,
+      const slideWidth = slideItems[0].offsetWidth + parseInt(getComputedStyle(slides).gap || 20);
+      slides.scrollTo({
+        left: slideAtual * slideWidth,
         behavior: 'smooth'
       });
+
       document.querySelectorAll(".indicadores button").forEach((b, i) => {
         b.classList.toggle("ativo", i === slideAtual);
       });
@@ -360,10 +395,9 @@
       document.getElementById('zoomOverlay').style.display = 'none';
     }
 
-    // Swipe
     let startX = 0;
-    slidesContainer.addEventListener('touchstart', e => startX = e.touches[0].clientX);
-    slidesContainer.addEventListener('touchend', e => {
+    slides.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+    slides.addEventListener('touchend', e => {
       const endX = e.changedTouches[0].clientX;
       const diff = endX - startX;
       if (Math.abs(diff) > 50) moverSlide(diff < 0 ? 1 : -1);
