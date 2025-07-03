@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comunidade Batalha pela Mente | Transforme sua vida e supere vícios</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@600;700&family=DM+Sans:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --fundo: #0a0a0a;
+      --cinza: #1b1b1b;
+      --claro: #f5f5f5;
+      --suave: #bbbbbb;
+      --dourado: #FBCE27;
+      --hover: #f0c000;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--fundo);
+      color: var(--claro);
+      font-size: 1.2rem;
+      line-height: 1.85;
+      font-weight: 700;
+    }
+
+    header img {
+      width: 100%;
+      max-height: 88vh;
+      object-fit: cover;
+      display: block;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 60px auto;
+      padding: 0 5%;
+    }
+
+    h2 {
+      font-family: 'Rubik', sans-serif;
+      font-size: 2.2rem;
+      color: var(--dourado);
+      margin-bottom: 20px;
+      border-left: 6px solid var(--dourado);
+      padding-left: 16px;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    p, li {
+      color: var(--suave);
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    ul li {
+      margin-bottom: 16px;
+      padding-left: 32px;
+      position: relative;
+    }
+
+    ul li::before {
+      content: "✔️";
+      position: absolute;
+      left: 0;
+    }
+
+    .cta {
+      text-align: center;
+      margin: 48px 0;
+    }
+
+    .cta a {
+      background: var(--dourado);
+      color: var(--fundo);
+      text-decoration: none;
+      padding: 18px 36px;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 1.2rem;
+      transition: background 0.3s ease, transform 0.2s ease;
+      display: inline-block;
+      box-shadow: 0 0 10px rgba(224, 184, 76, 0.25);
+      font-family: 'Rubik', sans-serif;
+    }
+
+    .cta a:hover {
+      background: var(--hover);
+      transform: scale(1.02);
+    }
+
+    .cta a:active {
+      transform: scale(0.98);
+    }
+
+    /* Carrossel */
+    .carrossel {
+      position: relative;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    /* Torna faixa de slides scrollável horizontalmente com snap para mobile */
+    .faixa-slides {
+      display: flex;
+      gap: 20px;
+      touch-action: pan-y;
+      overflow-x: auto;             /* permite scroll horizontal */
+      scroll-snap-type: x mandatory; /* snap */
+      -webkit-overflow-scrolling: touch; /* melhor scroll no iOS */
+      scroll-behavior: smooth;
+      /* ESCONDER A BARRA DE ROLAGEM */
+      -ms-overflow-style: none;  /* IE e Edge */
+      scrollbar-width: none;     /* Firefox */
+    }
+    .faixa-slides::-webkit-scrollbar {
+      display: none;             /* Chrome, Safari e Opera */
+    }
+    .slide {
+      flex-shrink: 0;
+      width: 100%;
+      max-width: 320px;
+      scroll-snap-align: center;    /* snap das imagens */
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    .slide img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
+      cursor: zoom-in;
+      transition: transform 0.3s ease;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .slide img:active {
+      transform: scale(1.05);
+    }
+
+    /* Botões setas */
+    .seta {
+      position: absolute;
+      top: 45%;
+      transform: translateY(-50%);
+      background: var(--dourado);
+      color: var(--fundo);
+      border: none;
+      font-size: 1.2rem;
+      padding: 6px 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 10;
+      transition: background 0.3s;
+      user-select: none;
+    }
+
+    .seta:hover {
+      background: var(--hover);
+    }
+
+    .seta.esquerda {
+      left: 10px;
+    }
+
+    .seta.direita {
+      right: 10px;
+    }
+
+    /* Indicadores bolinhas */
+    .indicadores {
+      display: flex;
+      justify-content: center;
+      margin-top: 8px;
+      gap: 4px;
+    }
+
+    .indicadores button {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--suave);
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .indicadores button.ativo {
+      background: var(--dourado);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .zoom-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .zoom-overlay img {
+      max-width: 95%;
+      max-height: 90%;
+      border-radius: 8px;
+    }
+
+    footer {
+      background: var(--cinza);
+      padding: 30px 20px;
+      text-align: center;
+      font-size: 1rem;
+      font-style: italic;
+      color: #aaa;
+      font-weight: 600;
+    }
+
+    section {
+      margin-bottom: 80px;
+    }
+
+    /* ======= MEDIA QUERIES ======= */
+    @media (max-width: 768px) {
+      h2 {
+        font-size: 1.8rem;
+      }
+
+      .cta a {
+        width: 100%;
+        padding: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        font-size: 1rem; /* diminui um pouco mais para ficar compacto */
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      header img {
+        max-height: 60vh; /* header menor em celular para não ocupar tanto espaço */
+      }
+
+      /* Ajuste para o carrossel: remover gap para evitar overflow desnecessário */
+      .faixa-slides {
+        gap: 12px;
+      }
+
+      /* Botões menores para não atrapalhar imagens */
+      .seta {
+        font-size: 1rem;
+        padding: 4px 8px;
+      }
+
+      /* Reduz largura máxima do slide para garantir encaixe em telas bem pequenas */
+      .slide {
+        max-width: 280px;
+      }
+
+      /* Ajuste nos espaços internos para um layout mais compacto */
+      main {
+        margin: 40px auto;
+        padding: 0 3%;
+      }
+
+      ul li {
+        margin-bottom: 12px;
+        padding-left: 24px;
+      }
+
+      .cta {
+        margin: 36px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="banner.png" alt="Banner da Comunidade Batalha pela Mente mostrando força e união" />
+  </header>
+
+  <main>
+    <section>
+      <h2>🧠 Quem somos</h2>
+      <p>Somos uma comunidade focada em reconstruir o poder da mente. Reunimos pessoas que buscam superar vícios, fortalecer a disciplina e viver com mais clareza mental. São mais de 100 membros ativos criando uma rede de apoio real e transformadora.</p>
+    </section>
+
+    <section>
+      <h2>🧭 O que você vai encontrar</h2>
+      <ul>
+        <li>🗓️ Desafios semanais como “7 dias limpo” e “3 dias sem dopamina”</li>
+        <li>📚 Conteúdos sobre disciplina, vícios, clareza mental e autoestima</li>
+        <li>👥 Divisão por faixa etária para apoio mais direcionado</li>
+        <li>🎧 Áudios, reflexões e encontros ao vivo</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>📸 Relatos reais da Comunidade</h2>
+      <p>Imagens reais do grupo. Depoimentos de motivação, progresso e superação 💬</p>
+      <div class="carrossel" id="carrossel">
+        <button class="seta esquerda" onclick="moverSlide(-1)">←</button>
+        <div class="faixa-slides" id="faixa">
+          <div class="slide"><img src="relatos/resized_Captura de tela 2025-07-01 170206.png" alt="Depoimento sobre desempenho sexual e autoconhecimento" /></div>
+          <div class="slide"><img src="relatos/resized_IMG_7477.PNG" alt="Motivação e união dentro do grupo de apoio" /></div>
+          <div class="slide"><img src="relatos/resized_IMG_7478.PNG" alt="Sentimento de pertencimento e conexão emocional" /></div>
+          <div class="slide"><img src="relatos/resized_Captura de tela 2025-07-01 170023.png" alt="Reflexão profunda sobre vício e superação" /></div>
+          <div class="slide"><img src="relatos/resized_Captura de tela 2025-07-01 170150.png" alt="Melhoras na vida pessoal com prática do nofap" /></div>
+        </div>
+        <button class="seta direita" onclick="moverSlide(1)">→</button>
+        <div class="indicadores"></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>🚀 Pronto para começar?</h2>
+      <p>Preencha o formulário com atenção para receber o link de entrada no WhatsApp ou por e-mail. Ao entrar, leia a mensagem fixada e se apresente com intenção.</p>
+      <div class="cta">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSc8BESjmYUqHvPfJlYvXDGX8nIg1665grbD2l1Eg0xpL3dr4g/viewform?usp=sharing" target="_blank">🧠 Quero fazer parte da comunidade</a>
+      </div>
+       <p><em>🔐 Seus dados são protegidos e usados apenas para seu ingresso na comunidade.</em></p>
+    </section>
+  </main>
+
+  <footer>
+    “⚡ Transformação, coragem e fortalecimento da mente. Você não está sozinho.”
+  </footer>
+
+  <!-- ZOOM FULLSCREEN -->
+  <div class="zoom-overlay" id="zoomOverlay" onclick="fecharZoom()">
+    <img id="zoomImagem" src="" alt="Imagem ampliada" />
+  </div>
+
+  <script>
+    let slideAtual = 0;
+    const slides = document.querySelector('.faixa-slides');
+    const slideItems = document.querySelectorAll('.faixa-slides .slide');
+    const indicadoresContainer = document.querySelector('.indicadores');
+
+    // Criar indicadores
+    slideItems.forEach((_, i) => {
+      const btn = document.createElement("button");
+      btn.addEventListener("click", () => {
+        slideAtual = i;
+        atualizarSlide();
+      });
+      indicadoresContainer.appendChild(btn);
+    });
+
+    function atualizarSlide() {
+      const larguraSlide = slideItems[0].clientWidth + 20;
+      slides.style.transform = `translateX(-${slideAtual * larguraSlide}px)`;
+      document.querySelectorAll(".indicadores button").forEach((b, i) => {
+        b.classList.toggle("ativo", i === slideAtual);
+      });
+    }
+
+    function moverSlide(direcao) {
+      slideAtual += direcao;
+      if (slideAtual < 0) slideAtual = slideItems.length - 1;
+      if (slideAtual >= slideItems.length) slideAtual = 0;
+      atualizarSlide();
+    }
+
+    setInterval(() => moverSlide(1), 5000);
+    atualizarSlide();
+
+    // ZOOM nas imagens
+    document.querySelectorAll('.slide img').forEach(img => {
+      img.addEventListener('click', () => {
+        document.getElementById('zoomImagem').src = img.src;
+        document.getElementById('zoomOverlay').style.display = 'flex';
+      });
+    });
+
+    function fecharZoom() {
+      document.getElementById('zoomOverlay').style.display = 'none';
+    }
+
+    // Swipe para celular
+    let startX = 0;
+    slides.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+    slides.addEventListener('touchend', e => {
+      const endX = e.changedTouches[0].clientX;
+      const diff = endX - startX;
+      if (Math.abs(diff) > 50) moverSlide(diff < 0 ? 1 : -1);
+    });
+  </script>
+</body>
+</html>
